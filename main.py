@@ -17,11 +17,11 @@ DOC_ID = '1kA8u6UhjbutZ-b7TXzmX4qkOTg6nGC1vPg50WwCcZyo'
 # Get the actual PDF doc link
 DL_URL = 'https://docs.google.com/document/export?format=odt&id=' + DOC_ID
 # Location of file
-# DL_PATH = Path('downloads') / ('minidiscs_' + datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + '.odt')
+DL_PATH = Path('downloads') / ('minidiscs_' + datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + '.odt')
 
-# print('Beginning download of Google Doc...')
-# wget.download(DL_URL, str(DL_PATH))
-# print('\nFile downloaded at ' + str(DL_PATH))
+print('Beginning download of Google Doc...')
+wget.download(DL_URL, str(DL_PATH))
+print('\nFile downloaded at ' + str(DL_PATH))
 
 def is_time(line):
     allowed = set('1234567890:')
@@ -62,15 +62,15 @@ def extract_text(file_path):
     i = 0
     while i < len(clean_lines):
         if 'DISC' in clean_lines[i]:
-            print(clean_lines[i])
+            # print(clean_lines[i])
             current_disc += 1
             md_num += 1
             i += 1
         if is_time(clean_lines[i]):
             time = clean_lines[i]
-            print(time)
+            # print(time)
             title = clean_lines[i + 1]
-            print(title)
+            # print(title)
             cue_dict['MD'+str(md_num)].append([time, title])
             if (i + 2 < len(clean_lines)) and (not ':' in clean_lines[i + 2]):
                 i += 3
