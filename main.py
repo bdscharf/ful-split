@@ -115,7 +115,7 @@ def write_cue(cue_dict):
                 f.write('    INDEX ' + f_num(1) + ' ' + f_time(time) + '\n')
 
             disc_num += 1
-        break
+        # break
 
 write_cue(extract_text(DL_PATH))
 
