@@ -92,8 +92,15 @@ def write_cue(cue_dict):
         return str(num)
 
     def f_time(t):
-        if t.count(':') < 2:
+        if t.count(':') == 1:
             t += ':00'
+        elif t.count(':') == 2:
+            times = t.split(':')
+            mins = int(times[1]) + (int(times[0]) * 60)
+            # print(t)
+            # print('new mins:')
+            # print(mins)
+            t = str(mins) + ':' + times[2] + ':00'
         return t
 
     disc_num = 1
@@ -111,11 +118,11 @@ def write_cue(cue_dict):
 
                 f.write('  TRACK ' + f_num(i+1) + ' AUDIO\n')
                 f.write('    TITLE ' + '"' + title + '"\n')
-                f.write('    PERFORMER ' + '"Radiohead"\n')
                 f.write('    INDEX ' + f_num(1) + ' ' + f_time(time) + '\n')
 
             disc_num += 1
         # break
 
 write_cue(extract_text(DL_PATH))
+print('Cue files written.')
 
